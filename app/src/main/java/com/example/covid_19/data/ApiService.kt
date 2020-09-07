@@ -5,6 +5,7 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 private const val BASE_URL = " https://corona.lmao.ninja"
 private val retrofit = Retrofit.Builder()
@@ -12,23 +13,16 @@ private val retrofit = Retrofit.Builder()
     .baseUrl(BASE_URL)
     .build()
 
-/*interface ApiServiceTotalScores {
-    @GET("cases")
-    fun getTotalCases():
-            Call<Int>
-    @GET("deaths")
-    fun getTotalDeaths():
-            Call<Int>
-    @GET("recovered")
-    fun getTotalRecovered():
-            Call<Int>
-}*/
+
 interface ApiServiceTotalScores {
     @GET("/v3/covid-19/all")
-    fun getTotalCases():
-            Call<TotalScoresResponse>
+    suspend fun getTotalCases(): TotalScoresResponse
+    @GET("/v2/countries")
+    suspend fun fetchAllCountries(): List<Country>
+    @GET("/v2/countries/{countryId}")
+    suspend fun getCountry(@Path("countryId")countryId: Int)
 }
-object TotalScoresApi {
+object Covid19Api {
     val retrofitService : ApiServiceTotalScores by lazy {
         retrofit.create(ApiServiceTotalScores::class.java) }
 }

@@ -3,7 +3,7 @@ package com.example.covid_19
 import android.app.Application
 import com.example.covid_19.data.Repository.Repository
 
-/*
+
 class Covid19App: Application() {
     companion object {
         lateinit var repository: Repository
@@ -12,4 +12,4 @@ class Covid19App: Application() {
         super.onCreate()
         repository = Repository()
     }
-}*/
+}

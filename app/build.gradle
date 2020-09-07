@@ -32,6 +32,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -61,4 +64,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
     //implementation 'com.squareup.retrofit2:converter-scalars:retrofit:2.6.2'
     kapt "androidx.room:room-compiler:$room_version" // For Kotlin use kapt instead of annotationProcessor
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:x.x.x"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:x.x.x"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:x.x.x"
 }
