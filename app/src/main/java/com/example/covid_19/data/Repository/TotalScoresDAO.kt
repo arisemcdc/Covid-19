@@ -2,15 +2,18 @@ package com.example.covid_19.data.Repository
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.covid_19.data.Response.TotalScores
 
 @Dao
 interface TotalScoresDAO {
-    @Query("SELECT * FROM TotalScoresEntity")
-    fun getTotalScores(): LiveData<TotalScoresEntity>
+    @Query("SELECT * FROM TotalScores")
+    fun getTotalScoresLiveData(): LiveData<List<TotalScores>>
+    @Query("SELECT * FROM TotalScores")
+    suspend fun getTotalScores(): List<TotalScores>
     @Insert
-    fun insert(totalScores: TotalScoresEntity)
+    suspend fun insert(totalScores: TotalScores)
     @Update
-    fun update(totalScores: TotalScoresEntity)
+    suspend fun update(totalScores: TotalScores)
     @Delete
-    fun delete(totalScores: TotalScoresEntity)
+    suspend fun delete(totalScores: TotalScores)
 }

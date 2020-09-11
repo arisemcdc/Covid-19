@@ -4,21 +4,11 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.*
 
-/*
-@Entity(tableName = "countries")
-data class CountryName(val name:String ="", @PrimaryKey val id: String = UUID.randomUUID().toString())
-@Entity(tableName = "ills")
-data class Ills(val score:Int = 0, @PrimaryKey val id: String = UUID.randomUUID().toString())
+@Entity(
+    tableName = "Countries"
+)
 data class Country(
-    val countryname: CountryName = CountryName(),
-    val ills: Ills = Ills(),
-    val id: String = UUID.randomUUID().toString()
-)*/
-
-
-/*data class CountryName(val name:String)
-data class Ills(val score:Int)*/
-data class Country(
+    @PrimaryKey
     var id:String = UUID.randomUUID().toString(),
     var cases: Int,
     var country: String,

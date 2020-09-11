@@ -3,13 +3,14 @@ package com.example.covid_19.data.Repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.covid_19.data.Country
-import com.example.covid_19.data.Response.TotalScoresResponse
+import com.example.covid_19.data.Response.TotalScores
+//import com.example.covid_19.data.Response.TotalScoresResponse
 
 class LocalDB(private val roomDB: RoomDB) {
     private val _countries = MutableLiveData<List<Country>>()
     val countries: LiveData<List<Country>> = _countries
-    private val _totalScores = MutableLiveData<TotalScoresResponse>()
-    val totalScores: LiveData<TotalScoresResponse> = _totalScores
+    private val _totalScores = MutableLiveData<TotalScores>()
+    val totalScores: LiveData<TotalScores> = _totalScores
     /*fun insertCountry(country: Country) = roomDB.countriesDao().insert(countrytoCountryEntity(country))*/
     /*private fun countrytoCountryEntity(country: Country): CountryEntity {
         val countryEntity = CountryEntity()

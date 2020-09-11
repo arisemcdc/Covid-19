@@ -1,7 +1,10 @@
 package com.example.covid_19
 
 import android.app.Application
+import androidx.room.Room
+import com.example.covid_19.data.Repository.LocalDB
 import com.example.covid_19.data.Repository.Repository
+import com.example.covid_19.data.Repository.RoomDB
 
 
 class Covid19App: Application() {
@@ -10,6 +13,7 @@ class Covid19App: Application() {
     }
     override fun onCreate() {
         super.onCreate()
-        repository = Repository()
+        val db = Room.databaseBuilder(applicationContext, RoomDB::class.java, "db").build()
+        repository = Repository(db)
     }
 }

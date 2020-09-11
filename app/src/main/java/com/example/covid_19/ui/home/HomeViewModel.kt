@@ -1,22 +1,27 @@
 package com.example.covid_19.ui.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import com.example.covid_19.Covid19App
 import com.example.covid_19.data.Covid19Api
 import com.example.covid_19.data.DataResult
-import com.example.covid_19.data.Response.TotalScoresResponse
+//import com.example.covid_19.data.Response.TotalScoresResponse
+import kotlinx.coroutines.delay
 /*import com.example.covid_19.data.TotalScoresApi */
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class HomeViewModel : ViewModel() {
+    private val _isLoading = MutableLiveData(false)
+    val isLoading: LiveData<Boolean> = _isLoading
 
-    val totalScores = LiveData {
-        val data = Covid19Api.repository.getTotalScore()
+
+    val totalScores = liveData {
+        _isLoading.value = true
+        delay(5000)
+        val data = Covid19App.repository.getTotalScore()
         emit(data)
+        _isLoading.value = false
     }
     val cases = Transformations.map(totalScores) {
         if (it is DataResult.Success) it.data.cases.toString()

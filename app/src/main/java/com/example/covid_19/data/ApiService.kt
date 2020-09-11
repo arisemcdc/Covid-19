@@ -1,6 +1,7 @@
 package com.example.covid_19.data
 
-import com.example.covid_19.data.Response.TotalScoresResponse
+import com.example.covid_19.data.Response.TotalScores
+//import com.example.covid_19.data.Response.TotalScoresResponse
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -16,7 +17,7 @@ private val retrofit = Retrofit.Builder()
 
 interface ApiServiceTotalScores {
     @GET("/v3/covid-19/all")
-    suspend fun getTotalCases(): TotalScoresResponse
+    suspend fun getTotalCases(): TotalScores
     @GET("/v2/countries")
     suspend fun fetchAllCountries(): List<Country>
     @GET("/v2/countries/{countryId}")

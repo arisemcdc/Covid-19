@@ -31,6 +31,12 @@ class HomeFragment : Fragment() {
         binding.viewmodel = viewModel
         val view = binding.root
         binding.lifecycleOwner = this
+        /*viewModel.isLoading.observe(viewLifecycleOwner, Observer {
+            if (it)
+                view.progressBar.visibility = View.VISIBLE
+            else
+                view.progressBar.visibility = View.GONE
+        })*/
         return view
     }
 

@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.covid_19.Adapters.CountriesListAdapter
@@ -15,8 +17,11 @@ import com.example.covid_19.R
 import com.example.covid_19.data.CountriesApi*/
 import com.example.covid_19.data.Country
 import com.example.covid_19.data.Covid19Api
+import com.example.covid_19.databinding.FragmentCountryBinding
+import com.example.covid_19.databinding.FragmentHomeBinding
 import com.example.covid_19.ui.home.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_country.*
+import kotlinx.android.synthetic.main.fragment_country.view.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -31,6 +36,10 @@ class CountriesListFragment : Fragment(), CountriesListAdapter.Listener {
     lateinit var countriesListAdapter: CountriesListAdapter
     lateinit var countries: List<Country>
     val viewModel : CountryListFragmentViewModel by viewModels()
+    private var _binding: FragmentCountryBinding? = null
+    // This property is only valid between onCreateView and
+// onDestroyView.
+    private val binding get() = _binding!!
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -38,27 +47,32 @@ class CountriesListFragment : Fragment(), CountriesListAdapter.Listener {
     ): View? {
        // dashboardViewModel =
                 //ViewModelProviders.of(this).get(DashboardViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_country, container, false)
-        /*root.countryCovidListRecyclerView.layoutManager = LinearLayoutManager(context)
-        countriesListAdapter = CountriesListAdapter(countries)
+        _binding = FragmentCountryBinding.inflate(inflater, container, false)
+        binding.viewmodel = viewModel
+        val view = binding.root
+        binding.root.countryCovidListRecyclerView.layoutManager = LinearLayoutManager(context)
+       /* countriesListAdapter = CountriesListAdapter(countries)
         root.countryCovidListRecyclerView.adapter = countriesListAdapter*/
-        getCountriesScores()
-        return root
+       viewModel.countriesList.observe(viewLifecycleOwner, Observer {
+           countriesListAdapter = CountriesListAdapter(viewModel.countriesList.value, this)
+           countryCovidListRecyclerView.adapter = countriesListAdapter
+       })
+        return view
     }
 
-    fun showData(countries: List<Country>) {
+   /* fun showData(countries: List<Country>) {
        countryCovidListRecyclerView.layoutManager = LinearLayoutManager(context)
        countriesListAdapter = CountriesListAdapter(countries, this)
        countryCovidListRecyclerView.adapter = countriesListAdapter
-   }
-    fun getCountriesScores() {
+   }*/
+    /*fun getCountriesScores() {
         GlobalScope.launch {
 
                 val data = Covid19Api.retrofitService.fetchAllCountries()
 
 
         }
-       /*val call = CountriesApi.retrofitService.fetchAllCountries()
+       *//*val call = CountriesApi.retrofitService.fetchAllCountries()
            call.enqueue(
             object:retrofit2.Callback<List<Country>> {
                 override fun onFailure(call: Call<List<Country>>, t: Throwable) {
@@ -73,16 +87,18 @@ class CountriesListFragment : Fragment(), CountriesListAdapter.Listener {
                 }
 
             }
-        )*/
-    }
+        )*//*
+    }*/
+   override fun onDestroyView() {
+       super.onDestroyView()
+       _binding = null
+   }
 
     override fun onClickCountry(country: Country) {
-       /* val bundle = Bundle()
-        bundle.putString("countryId", null)*/
-        val action = CountriesListFragmentDirections.actionNavigationCountryToDetailCountryFragment(country.id)
-        //findNavController().navigate(R.id.action_navigation_country_to_detailCountryFragment, bundle)
-        //val action = CountriesListFragmentDirections
+       val action = CountriesListFragmentDirections.actionNavigationCountryToDetailCountryFragment(country.id)
         findNavController().navigate(action)
     }
 }
+
+
 

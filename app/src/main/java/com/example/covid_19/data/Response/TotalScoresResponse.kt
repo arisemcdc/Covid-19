@@ -1,9 +1,15 @@
 package com.example.covid_19.data.Response
 
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
-
-data class TotalScoresResponse(
+@Entity(
+    tableName = "TotalScores"
+)
+data class TotalScores(
+    @PrimaryKey
+    val id: Int = 1,
     var active: Int,
     var activePerOneMillion: Double,
     var affectedCountries: Int,
