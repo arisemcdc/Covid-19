@@ -33,8 +33,6 @@
         tools:layout="@layout/detail_country_fragment" >
         <argument
             android:name="countryId"
-            app:argType="string"
-            app:nullable="true"
-            android:defaultValue="null" />
+            app:argType="integer" />
     </fragment>
 </navigation>

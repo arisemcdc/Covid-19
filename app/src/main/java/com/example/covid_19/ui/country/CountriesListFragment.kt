@@ -54,12 +54,19 @@ class CountriesListFragment : Fragment(), CountriesListAdapter.Listener {
         binding.root.countryCovidListRecyclerView.layoutManager = LinearLayoutManager(context)
        /* countriesListAdapter = CountriesListAdapter(countries)
         root.countryCovidListRecyclerView.adapter = countriesListAdapter*/
-       viewModel.countriesList.observe(viewLifecycleOwner, Observer {list ->
-           if (list != null) {
-                countriesListAdapter = CountriesListAdapter(list, this)
+       viewModel.countries.observe(viewLifecycleOwner, Observer {result ->
+           if (result is DataResult.Success) {
+                countriesListAdapter = CountriesListAdapter(result.data, this)
                 countryCovidListRecyclerView.adapter = countriesListAdapter
-
+                countryCovidListRecyclerView.visibility=View.VISIBLE
+                errorTextView.visibility = View.GONE
             }
+           else {
+               countryCovidListRecyclerView.visibility=View.GONE
+               errorTextView.visibility = View.VISIBLE
+               errorTextView.text = "Error!"
+           }
+
        })
         return view
     }

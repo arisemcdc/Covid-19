@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.example.covid_19.R
+import com.example.covid_19.data.DataResult
 import com.example.covid_19.ui.home.HomeViewModel
 import kotlinx.android.synthetic.main.detail_country_fragment.view.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
@@ -27,18 +29,28 @@ class DetailCountryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        viewModel.setCountryId(args.countryId)
 
-        /*val tempCountry = */
-        /*root=inflater.inflate(R.layout.detail_country_fragment, container, false)
-        //root.countryNameValue.setText(viewModel.tempCountry.value?.country)
-       // root.casesTextViewValue.setText(viewModel.tempCountry.value?.cases.toString())
-        //root.todayCasesTextViewValue.setText(viewModel.tempCountry.value?.todayCases.toString())
-        //root.deathsTextViewValue.setText(viewModel.tempCountry.value?.deaths.toString())
-        root.todayDeathTextViewValue.setText(viewModel.tempCountry.value?.deaths.toString())
-        root.recoveredTextViewValue.setText(viewModel.tempCountry.value?.recovered.toString())
-        root.todayRecoveredTextViewValue.setText(viewModel.tempCountry.value?.recovered.toString())
-        root.testsTextViewValue.setText(viewModel.tempCountry.value?.tests.toString())
-        root.populationTextViewValue.setText(viewModel.tempCountry.value?.population.toString())*/
+        root=inflater.inflate(R.layout.detail_country_fragment, container, false)
+        viewModel.country.observe(viewLifecycleOwner, Observer{country ->
+            if (country != null){
+                root.countryNameValue.setText(country.country)
+                root.casesTextViewValue.setText(country.cases.toString())
+                root.todayCasesTextViewValue.setText(country.todayCases.toString())
+                root.deathsTextViewValue.setText(country.deaths.toString())
+                root.todayDeathTextViewValue.setText(country.deaths.toString())
+                root.recoveredTextViewValue.setText(country.recovered.toString())
+                root.todayRecoveredTextViewValue.setText(country.recovered.toString())
+                root.testsTextViewValue.setText(country.tests.toString())
+                root.populationTextViewValue.setText(country.population.toString())
+                // container.visibility = View.VISIBLE
+                root.errorTextView.visibility = View.GONE
+            } else{
+                // container.visibility = View.GONE
+                root.errorTextView.visibility = View.VISIBLE
+            }
+        })
+
 
         return root
     }
