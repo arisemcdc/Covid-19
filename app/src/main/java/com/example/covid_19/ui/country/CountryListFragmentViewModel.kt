@@ -17,10 +17,18 @@ class CountryListFragmentViewModel : ViewModel() {
         emit(data)
         _isLoading.value = false
     }
-    val  countriesList = Transformations.map(countries) {
-        if (it is DataResult.Success) it.data
+    val countriesList = Transformations.map(countries) {
+        if (it is DataResult.Success)
+            it.data
         else
-            "Error"
+            null
+    }
+
+    val error = Transformations.map(countries){
+        if (it is DataResult.Error)
+            "Error!"
+        else
+            null
     }
 
    /* val cases = Transformations.map(totalScores) {

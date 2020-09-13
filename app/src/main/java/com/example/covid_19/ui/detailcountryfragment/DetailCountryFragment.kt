@@ -29,17 +29,17 @@ class DetailCountryFragment : Fragment() {
     ): View? {
 
         /*val tempCountry = */
-        root=inflater.inflate(R.layout.detail_country_fragment, container, false)
-        root.countryNameValue.setText(viewModel.tempCountry.value?.country)
-        root.casesTextViewValue.setText(viewModel.tempCountry.value?.cases.toString())
-        root.todayCasesTextViewValue.setText(viewModel.tempCountry.value?.todayCases.toString())
-        root.deathsTextViewValue.setText(viewModel.tempCountry.value?.deaths.toString())
+        /*root=inflater.inflate(R.layout.detail_country_fragment, container, false)
+        //root.countryNameValue.setText(viewModel.tempCountry.value?.country)
+       // root.casesTextViewValue.setText(viewModel.tempCountry.value?.cases.toString())
+        //root.todayCasesTextViewValue.setText(viewModel.tempCountry.value?.todayCases.toString())
+        //root.deathsTextViewValue.setText(viewModel.tempCountry.value?.deaths.toString())
         root.todayDeathTextViewValue.setText(viewModel.tempCountry.value?.deaths.toString())
         root.recoveredTextViewValue.setText(viewModel.tempCountry.value?.recovered.toString())
         root.todayRecoveredTextViewValue.setText(viewModel.tempCountry.value?.recovered.toString())
         root.testsTextViewValue.setText(viewModel.tempCountry.value?.tests.toString())
-        root.populationTextViewValue.setText(viewModel.tempCountry.value?.population.toString())
-        //return inflater.inflate(R.layout.detail_country_fragment, container, false)
+        root.populationTextViewValue.setText(viewModel.tempCountry.value?.population.toString())*/
+
         return root
     }
 

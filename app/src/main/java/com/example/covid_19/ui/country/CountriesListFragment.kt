@@ -17,6 +17,7 @@ import com.example.covid_19.R
 import com.example.covid_19.data.CountriesApi*/
 import com.example.covid_19.data.Country
 import com.example.covid_19.data.Covid19Api
+import com.example.covid_19.data.DataResult
 import com.example.covid_19.databinding.FragmentCountryBinding
 import com.example.covid_19.databinding.FragmentHomeBinding
 import com.example.covid_19.ui.home.HomeViewModel
@@ -53,9 +54,12 @@ class CountriesListFragment : Fragment(), CountriesListAdapter.Listener {
         binding.root.countryCovidListRecyclerView.layoutManager = LinearLayoutManager(context)
        /* countriesListAdapter = CountriesListAdapter(countries)
         root.countryCovidListRecyclerView.adapter = countriesListAdapter*/
-       viewModel.countriesList.observe(viewLifecycleOwner, Observer {
-           countriesListAdapter = CountriesListAdapter(viewModel.countriesList.value, this)
-           countryCovidListRecyclerView.adapter = countriesListAdapter
+       viewModel.countriesList.observe(viewLifecycleOwner, Observer {list ->
+           if (list != null) {
+                countriesListAdapter = CountriesListAdapter(list, this)
+                countryCovidListRecyclerView.adapter = countriesListAdapter
+
+            }
        })
         return view
     }

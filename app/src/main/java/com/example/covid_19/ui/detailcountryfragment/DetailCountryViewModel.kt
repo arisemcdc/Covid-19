@@ -11,9 +11,11 @@ import com.example.covid_19.data.Repository.RoomDB
 //import com.example.covid_19.data.Response.TotalScoresResponse
 
 class DetailCountryViewModel : ViewModel() {
-    val args: DetailCountryFragmentArgs by navArgs()
-    val tempCountry = Repository.localDB.countriesDao().getCountriesLiveData.value?.find { args.countryId== it.id }
+    //private val repository: Repository
+   /* val args: DetailCountryFragmentArgs by navArgs()
 
+    val tempCountry = Repository.rezult..countriesDao().getCountriesLiveData.value?.find { args.countryId== it.id }
+*/
     /*private val _responseDetailCountry = MutableLiveData<Country>().apply {
 
     }

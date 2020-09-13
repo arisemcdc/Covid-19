@@ -25,7 +25,7 @@ class Repository (val localDB:RoomDB) {
     suspend fun getCountriesScores(): DataResult<List<Country>> {
        val result = try {
            val data = Covid19Api.retrofitService.fetchAllCountries()
-           localDB.countriesDao().insert(data)
+           //localDB.countriesDao().insert(data)
            DataResult.Success(data)
        } catch (e: Exception) {
            val localData = localDB.countriesDao().getCountries()

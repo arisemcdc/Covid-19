@@ -11,3 +11,11 @@ fun View.visibilityIftrue(value: Boolean) {
     else
         visibility = View.GONE
 }
+@BindingAdapter("app:visibilityIfNotNull")
+fun View.visibilityIfNotNull(value: Any?) {
+    if (value == null) {
+        visibility = View.GONE
+    }
+    else
+        visibility = View.VISIBLE
+}
