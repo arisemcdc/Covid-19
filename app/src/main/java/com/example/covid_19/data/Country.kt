@@ -14,6 +14,7 @@ data class Country(
     var info: CountryInfo,
     @PrimaryKey
     val id: Int = info._id,
+    var flag: String = info.flag,
     var cases: Int,
     var country: String,
     var deaths: Int,
@@ -26,5 +27,6 @@ data class Country(
 )
 
 data class CountryInfo(
-   var _id:Int
+   var _id:Int,
+    var flag: String
 )

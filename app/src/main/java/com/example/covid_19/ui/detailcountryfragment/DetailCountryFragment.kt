@@ -12,6 +12,8 @@ import androidx.navigation.fragment.navArgs
 import com.example.covid_19.R
 import com.example.covid_19.data.DataResult
 import com.example.covid_19.ui.home.HomeViewModel
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.detail_country_fragment.*
 import kotlinx.android.synthetic.main.detail_country_fragment.view.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
@@ -43,11 +45,16 @@ class DetailCountryFragment : Fragment() {
                 root.todayRecoveredTextViewValue.setText(country.recovered.toString())
                 root.testsTextViewValue.setText(country.tests.toString())
                 root.populationTextViewValue.setText(country.population.toString())
-                // container.visibility = View.VISIBLE
+               root.containerDetailContry.visibility = View.VISIBLE
+                Picasso.with(context)
+                    .load(country.flag)
+                    //.placeholder(R.drawable.user_placeholder)
+                    //.error(R.drawable.user_placeholder_error)
+                    .into(flagImageView)
                 root.errorTextView.visibility = View.GONE
             } else{
-                // container.visibility = View.GONE
                 root.errorTextView.visibility = View.VISIBLE
+                root.containerDetailContry.visibility = View.GONE
             }
         })
 

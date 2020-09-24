@@ -28,7 +28,7 @@ class CountryListFragmentViewModel : ViewModel() {
         if (it is DataResult.Error)
             "Error!"
         else
-            null
+            null // а зачем тут оборабаывать null , если когда у нас не DaraResult.Error, то Success?
     }
 
    /* val cases = Transformations.map(totalScores) {
