@@ -2,7 +2,6 @@ package com.example.covid_19
 
 import android.app.Application
 import androidx.room.Room
-import com.example.covid_19.data.Repository.LocalDB
 import com.example.covid_19.data.Repository.Repository
 import com.example.covid_19.data.Repository.RoomDB
 

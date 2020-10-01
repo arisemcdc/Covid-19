@@ -10,13 +10,13 @@ import java.util.*
     tableName = "Countries"
 )
 data class Country(
-    @Embedded
+    @Embedded()
+    @SerializedName(value = "countryInfo")
     var info: CountryInfo,
-    @PrimaryKey
-    val id: Int = info._id,
-    var flag: String = info.flag,
     var cases: Int,
-    var country: String,
+    @PrimaryKey
+    @SerializedName(value = "country")
+    var name: String,
     var deaths: Int,
     var population: Int,
     var recovered: Int,
@@ -27,6 +27,5 @@ data class Country(
 )
 
 data class CountryInfo(
-   var _id:Int,
     var flag: String
 )

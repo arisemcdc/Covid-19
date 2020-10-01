@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.example.covid_19.R
+import com.example.covid_19.data.DataResult
 import com.example.covid_19.databinding.FragmentHomeBinding
 import com.example.covid_19.ui.home.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_home.view.*
@@ -37,6 +39,11 @@ class HomeFragment : Fragment() {
             else
                 view.progressBar.visibility = View.GONE
         })*/
+
+        /*if (viewModel.totalScores is DataResult.Success(viewModel.totalScores.isFromCache)) {
+
+                Toast.makeText(context, "Данные получены из кэша", Toast.LENGTH_SHORT).show()
+        }*/
         return view
     }
 

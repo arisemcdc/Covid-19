@@ -20,23 +20,25 @@
             android:id="@+id/nameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="168dp"
             android:layout_marginTop="28dp"
             android:text="Covid-19"
             android:textColor="#222020"
             android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/totalConfirmedTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="126dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="140dp"
             android:layout_marginTop="32dp"
             android:text="Total confirmed"
             android:textColor="#1B1A1A"
             android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/nameTextView" />
 
@@ -44,11 +46,12 @@
             android:id="@+id/totalConfirmedScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="184dp"
             android:layout_marginTop="32dp"
             android:text="@{viewmodel.cases}"
             android:textColor="#222020"
             android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/totalConfirmedTextView" />
 
@@ -56,11 +59,12 @@
             android:id="@+id/totalDeathsTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="164dp"
             android:layout_marginTop="32dp"
             android:text="Total deaths"
             android:textColor="#222020"
             android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/totalConfirmedScore" />
 
@@ -68,11 +72,12 @@
             android:id="@+id/totalDeathsScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="192dp"
             android:layout_marginTop="32dp"
             android:text="@{viewmodel.deaths}"
             android:textColor="#222020"
             android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/totalDeathsTextView" />
 
@@ -80,11 +85,12 @@
             android:id="@+id/totalRecoveredTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="164dp"
             android:layout_marginTop="32dp"
             android:text="Total recovered"
             android:textColor="#222020"
             android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/totalDeathsScore" />
 
@@ -92,25 +98,16 @@
             android:id="@+id/totalRecoveredScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="200dp"
             android:layout_marginTop="44dp"
             android:text="@{viewmodel.recovered}"
             android:textColor="#222020"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/totalRecoveredTextView"
             app:layout_constraintVertical_bias="0.0" />
-
-        <Button
-            android:id="@+id/insertTotalScoresButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="164dp"
-            android:layout_marginTop="28dp"
-            android:text="Insert"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/totalRecoveredScore" />
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -122,6 +119,6 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:visibilityIfTrue="@{viewmodel.isLoading()}"/>
+            app:visibilityIfTrue="@{viewmodel.isLoading()}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

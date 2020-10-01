@@ -15,12 +15,12 @@ import com.example.covid_19.data.Repository.RoomDB
 
 class DetailCountryViewModel : ViewModel() {
     //private val repository: Repository
-    private var _countryId: Int? = null
+    private var _countryId: String? = null
 
     val country = liveData {
-        val rezult = Covid19App.repository.getCountriesScores()
+        val rezult = Covid19App.repository.getCountriesScores(false)
         if (_countryId != null && rezult is DataResult.Success){
-            val country = rezult.data.find{it.id == _countryId}
+            val country = rezult.data.find{it.name == _countryId}
             if (country == null) 
                 throw Exception("cant find country with id=$_countryId")
             else
@@ -31,7 +31,7 @@ class DetailCountryViewModel : ViewModel() {
             emit(null)
     }
 
-    fun setCountryId(id: Int){
+    fun setCountryId(id: String){
         _countryId = id
     }
     /*private val _responseDetailCountry = MutableLiveData<Country>().apply {

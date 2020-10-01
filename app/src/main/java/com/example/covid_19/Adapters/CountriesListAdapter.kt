@@ -41,7 +41,7 @@ class CountryViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     var country: Country? = null
         set(value) {
             field = value
-            itemView.countryNameTextView.text = value?.country
+            itemView.countryNameTextView.text = value?.name
             itemView.illsScoreTextView.text = value?.cases.toString()
         }
 }

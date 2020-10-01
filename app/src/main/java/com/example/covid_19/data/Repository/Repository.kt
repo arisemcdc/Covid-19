@@ -12,25 +12,25 @@ class Repository (val localDB:RoomDB) {
        val result = try {
            val data = Covid19Api.retrofitService.getTotalCases()
            localDB.TotalScoresDAO().insert(data)
-           DataResult.Success(data)
+           DataResult.Success(data, false)
         } catch (e: Exception) {
            val localData = localDB.TotalScoresDAO().getTotalScores()
            if (localData.isNotEmpty())
-               DataResult.Success(localData[0])
+               DataResult.Success(localData[0], true)
            else
             DataResult.Error(e)
         }
         return result
     }
-    suspend fun getCountriesScores(): DataResult<List<Country>> {
+    suspend fun getCountriesScores(needUpdate: Boolean = true): DataResult<List<Country>> {
        val result = try {
            val data = Covid19Api.retrofitService.fetchAllCountries()
-           //localDB.countriesDao().insert(data)
-           DataResult.Success(data)
+           localDB.countriesDao().insert(data)
+           DataResult.Success(data, false)
        } catch (e: Exception) {
            val localData = localDB.countriesDao().getCountries()
            if (localData.isNotEmpty())
-               DataResult.Success(localData)
+               DataResult.Success(localData, true)
            else
                DataResult.Error(e)
        }

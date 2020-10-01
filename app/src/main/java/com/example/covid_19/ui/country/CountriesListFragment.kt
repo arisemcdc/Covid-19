@@ -5,6 +5,7 @@ import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -57,6 +58,9 @@ class CountriesListFragment : Fragment(), CountriesListAdapter.Listener {
        viewModel.countries.observe(viewLifecycleOwner, Observer {result ->
            if (result is DataResult.Success) {
                 countriesListAdapter = CountriesListAdapter(result.data, this)
+                if (result.isFromCache == true) {
+                    Toast.makeText(context, "Данные получены из кэша", Toast.LENGTH_SHORT).show()
+                }
                 countryCovidListRecyclerView.adapter = countriesListAdapter
                 countryCovidListRecyclerView.visibility=View.VISIBLE
                 errorTextView.visibility = View.GONE
@@ -106,7 +110,7 @@ class CountriesListFragment : Fragment(), CountriesListAdapter.Listener {
    }
 
     override fun onClickCountry(country: Country) {
-       val action = CountriesListFragmentDirections.actionNavigationCountryToDetailCountryFragment(country.id)
+       val action = CountriesListFragmentDirections.actionNavigationCountryToDetailCountryFragment(country.name)
         findNavController().navigate(action)
     }
 }
