@@ -45,9 +45,9 @@ class DetailCountryFragment : Fragment() {
                 root.casesTextViewValue.setText(country.cases.toString())
                 root.todayCasesTextViewValue.setText(country.todayCases.toString())
                 root.deathsTextViewValue.setText(country.deaths.toString())
-                root.todayDeathTextViewValue.setText(country.deaths.toString())
+                root.todayDeathTextViewValue.setText(country.todayDeaths.toString())
                 root.recoveredTextViewValue.setText(country.recovered.toString())
-                root.todayRecoveredTextViewValue.setText(country.recovered.toString())
+                root.todayRecoveredTextViewValue.setText(country.todayRecovered.toString())
                 root.testsTextViewValue.setText(country.tests.toString())
                 root.populationTextViewValue.setText(country.population.toString())
                 root.containerDetailContry.visibility = View.VISIBLE
