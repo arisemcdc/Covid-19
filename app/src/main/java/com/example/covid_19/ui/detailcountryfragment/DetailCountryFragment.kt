@@ -65,6 +65,9 @@ class DetailCountryFragment : Fragment() {
                         }
                     })
                 root.errorTextView.visibility = View.GONE
+                if (viewModel.showToast == true) {
+                    Toast.makeText(context, "Данные получены из кэша", Toast.LENGTH_SHORT).show()
+                }
                /* if (viewModel.country is DataResult.Success<> {
                     Toast.makeText(context, "Данные получены из кэша", Toast.LENGTH_SHORT).show()
                 }**/

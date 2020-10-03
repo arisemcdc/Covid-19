@@ -16,19 +16,36 @@ import com.example.covid_19.data.Repository.RoomDB
 class DetailCountryViewModel : ViewModel() {
     //private val repository: Repository
     private var _countryId: String? = null
-
+    var showToast: Boolean = false
     val country = liveData {
-        val rezult = Covid19App.repository.getCountriesScores(false)
-        if (_countryId != null && rezult is DataResult.Success){
-            val country = rezult.data.find{it.name == _countryId}
-            if (country == null) 
-                throw Exception("cant find country with id=$_countryId")
-            else
-                emit(country)
+        val rezult = Covid19App.repository.getCountriesScores(false)//DataResult<List<Country>>
+       // val rezult = Covid19App.repository.localDB.countriesDao().getCountries()//List<Country>
 
+        if (_countryId != null && rezult is DataResult.Success){
+            if (rezult.isFromCache == true) {
+                showToast = true
+                val country = rezult.data.find { it.name == _countryId }
+                if (country == null)
+                    throw Exception("cant find country with id=$_countryId")
+                else
+                    emit(country)//Что значит emit ?
+            }
         }
         else
             emit(null)
+
+        /*if (_countryId != null ){
+            val country = rezult.find{it.name == _countryId}
+            if (country == null)
+                throw Exception("cant find country with id=$_countryId")
+            else
+                emit(country)//Что значит emit ?
+
+        }
+        else
+            emit(null)*/
+
+
     }
 
     fun setCountryId(id: String){

@@ -20,7 +20,7 @@ class HomeViewModel : ViewModel() {
         _isLoading.value = true
         delay(5000)
         val data = Covid19App.repository.getTotalScore()
-        emit(data)
+        emit(data)// Что это означает?
         _isLoading.value = false
     }
     val cases = Transformations.map(totalScores) {

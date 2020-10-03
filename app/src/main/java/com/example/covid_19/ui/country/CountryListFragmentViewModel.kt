@@ -17,20 +17,21 @@ class CountryListFragmentViewModel : ViewModel() {
         emit(data)
         _isLoading.value = false
     }
+
     val countriesList = Transformations.map(countries) {
         if (it is DataResult.Success)
             it.data
         else
             null
     }
-
+//livedata для recyclerView
     val error = Transformations.map(countries){
         if (it is DataResult.Error)
             "Error!"
         else
             null // а зачем тут оборабаывать null , если когда у нас не DaraResult.Error, то Success?
     }
-
+// livedata для textView
    /* val cases = Transformations.map(totalScores) {
         if (it is DataResult.Success) it.data.cases.toString()
         else

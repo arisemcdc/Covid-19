@@ -10,11 +10,11 @@ import java.lang.Exception
 class Repository (val localDB:RoomDB) {
     suspend fun getTotalScore(): DataResult<TotalScores> {
        val result = try {
-           val data = Covid19Api.retrofitService.getTotalCases()
+           val data = Covid19Api.retrofitService.getTotalCases()//это из Ретрофит
            localDB.TotalScoresDAO().insert(data)
-           DataResult.Success(data, false)
+           DataResult.Success(data, false)//что в в наборе этих строк в скобках назначается в result?
         } catch (e: Exception) {
-           val localData = localDB.TotalScoresDAO().getTotalScores()
+           val localData = localDB.TotalScoresDAO().getTotalScores()//а это из таблицы БД в Room
            if (localData.isNotEmpty())
                DataResult.Success(localData[0], true)
            else

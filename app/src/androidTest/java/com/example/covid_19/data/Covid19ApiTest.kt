@@ -15,4 +15,10 @@ class Covid19ApiTest : TestCase() {
         Log.d("myLog", data.toString())
      Unit
     }
+    @Test
+    fun fetchAllCountries() = runBlocking {
+        val data =Covid19Api.retrofitService.fetchAllCountries()
+        Log.d("myLog", data.toString())
+        Unit
+    }
 }

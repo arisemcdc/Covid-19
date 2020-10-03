@@ -29,8 +29,8 @@
     <fragment
         android:id="@+id/detailCountryFragment"
         android:name="com.example.covid_19.ui.detailcountryfragment.DetailCountryFragment"
-        android:label="detail_country_fragment"
-        tools:layout="@layout/detail_country_fragment" >
+        android:label="@string/title_detailed"
+        tools:layout="@layout/detail_country_fragment">
         <argument
             android:name="countryId"
             app:argType="string" />
