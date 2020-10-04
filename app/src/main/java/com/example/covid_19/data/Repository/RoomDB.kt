@@ -8,5 +8,5 @@ import com.example.covid_19.data.Response.TotalScores
 @Database(entities = [Country::class, TotalScores::class], version = 1)
 abstract class RoomDB : RoomDatabase() {
     abstract fun countriesDao(): CountriesDAO
-    abstract fun TotalScoresDAO(): TotalScoresDAO
+    abstract fun totalScoresDAO(): TotalScoresDAO
 }

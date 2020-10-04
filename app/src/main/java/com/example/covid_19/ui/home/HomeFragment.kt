@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import com.example.covid_19.R
 import com.example.covid_19.data.DataResult
 import com.example.covid_19.databinding.FragmentHomeBinding
+import com.example.covid_19.ui.EventObserver
 import com.example.covid_19.ui.home.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
@@ -45,6 +46,13 @@ class HomeFragment : Fragment() {
                 Toast.makeText(context, "Данные получены из кэша", Toast.LENGTH_SHORT).show()
         }*/
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.showToastLiveData.observe(viewLifecycleOwner, EventObserver{text->
+            Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+        })
     }
 
     override fun onDestroyView() {

@@ -10,26 +10,30 @@ import com.example.covid_19.data.Country
 import com.example.covid_19.data.DataResult
 import com.example.covid_19.data.Repository.Repository
 import com.example.covid_19.data.Repository.RoomDB
+import com.example.covid_19.ui.Event
 
 //import com.example.covid_19.data.Response.TotalScoresResponse
 
 class DetailCountryViewModel : ViewModel() {
     //private val repository: Repository
     private var _countryId: String? = null
-    var showToast: Boolean = false
+
+    private val _showToastLiveData =  MutableLiveData<Event<String>>()
+    val showToastLiveData: LiveData<Event<String>> = _showToastLiveData
+
     val country = liveData {
         val rezult = Covid19App.repository.getCountriesScores(false)//DataResult<List<Country>>
        // val rezult = Covid19App.repository.localDB.countriesDao().getCountries()//List<Country>
-
+        
         if (_countryId != null && rezult is DataResult.Success){
-            if (rezult.isFromCache == true) {
-                showToast = true
-                val country = rezult.data.find { it.name == _countryId }
-                if (country == null)
-                    throw Exception("cant find country with id=$_countryId")
-                else
-                    emit(country)//Что значит emit ?
-            }
+            if (rezult.isFromCache)
+                _showToastLiveData.value = Event("Данные получены из кэша")
+            val country = rezult.data.find { it.name == _countryId }
+            if (country == null)
+                throw Exception("cant find country with id=$_countryId")
+            else
+                emit(country)//Что значит emit ?
+
         }
         else
             emit(null)

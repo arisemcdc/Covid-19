@@ -11,10 +11,15 @@ class Repository (val localDB:RoomDB) {
     suspend fun getTotalScore(): DataResult<TotalScores> {
        val result = try {
            val data = Covid19Api.retrofitService.getTotalCases()//это из Ретрофит
-           localDB.TotalScoresDAO().insert(data)
+           try{
+               localDB.totalScoresDAO().deleteAll()
+               localDB.totalScoresDAO().insert(data)
+           } catch(e: Exception ){
+           }
+
            DataResult.Success(data, false)//что в в наборе этих строк в скобках назначается в result?
         } catch (e: Exception) {
-           val localData = localDB.TotalScoresDAO().getTotalScores()//а это из таблицы БД в Room
+           val localData = localDB.totalScoresDAO().getTotalScores()//а это из таблицы БД в Room
            if (localData.isNotEmpty())
                DataResult.Success(localData[0], true)
            else
@@ -26,7 +31,12 @@ class Repository (val localDB:RoomDB) {
        val result = try {
            //if (needUpdate == true) {
            val data = Covid19Api.retrofitService.fetchAllCountries()
-           localDB.countriesDao().insert(data)
+           try{
+                localDB.countriesDao().deleteAll()
+                localDB.countriesDao().insert(data)
+           } catch(e: Exception ){
+
+           }
            DataResult.Success(data, false)
            //else
                 //localDB.countriesDao().getCountries()

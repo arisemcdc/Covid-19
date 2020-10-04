@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.example.covid_19.Covid19App
 import com.example.covid_19.data.Covid19Api
 import com.example.covid_19.data.DataResult
+import com.example.covid_19.ui.Event
 //import com.example.covid_19.data.Response.TotalScoresResponse
 import kotlinx.coroutines.delay
 /*import com.example.covid_19.data.TotalScoresApi */
@@ -14,12 +15,16 @@ import retrofit2.Response
 class HomeViewModel : ViewModel() {
     private val _isLoading = MutableLiveData(false)
     val isLoading: LiveData<Boolean> = _isLoading
-
+    private val _showToastLiveData =  MutableLiveData<Event<String>>()
+    val showToastLiveData: LiveData<Event<String>> = _showToastLiveData
 
     val totalScores = liveData {
         _isLoading.value = true
-        delay(5000)
+        //delay(5000)
         val data = Covid19App.repository.getTotalScore()
+
+        if (data is DataResult.Success && data.isFromCache)
+            _showToastLiveData.value = Event("Данные получены из кэша")
         emit(data)// Что это означает?
         _isLoading.value = false
     }

@@ -16,4 +16,7 @@ interface CountriesDAO {
     suspend fun update(country: Country)
     @Delete
     suspend fun delete(country: Country)
+    
+    @Query("DELETE FROM Countries")
+    suspend fun deleteAll()
 }

@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.covid_19.R
 import com.example.covid_19.data.DataResult
+import com.example.covid_19.ui.EventObserver
 import com.example.covid_19.ui.home.HomeViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
@@ -39,6 +40,10 @@ class DetailCountryFragment : Fragment() {
         root=inflater.inflate(R.layout.detail_country_fragment, container, false)
         setHasOptionsMenu(true)
         activity?.nav_view?.visibility = View.GONE
+        viewModel.showToastLiveData.observe(viewLifecycleOwner, EventObserver{text->
+            Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+        })
+
         viewModel.country.observe(viewLifecycleOwner, Observer{country ->
             if (country != null){
                 root.countryNameValue.setText(country.name)
@@ -65,9 +70,7 @@ class DetailCountryFragment : Fragment() {
                         }
                     })
                 root.errorTextView.visibility = View.GONE
-                if (viewModel.showToast == true) {
-                    Toast.makeText(context, "Данные получены из кэша", Toast.LENGTH_SHORT).show()
-                }
+
                /* if (viewModel.country is DataResult.Success<> {
                     Toast.makeText(context, "Данные получены из кэша", Toast.LENGTH_SHORT).show()
                 }**/

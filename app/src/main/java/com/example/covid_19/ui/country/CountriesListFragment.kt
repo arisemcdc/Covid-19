@@ -58,9 +58,8 @@ class CountriesListFragment : Fragment(), CountriesListAdapter.Listener {
        viewModel.countries.observe(viewLifecycleOwner, Observer {result ->
            if (result is DataResult.Success) {
                 countriesListAdapter = CountriesListAdapter(result.data, this)
-                if (result.isFromCache == true) {
+                if (result.isFromCache == true)
                     Toast.makeText(context, "Данные получены из кэша", Toast.LENGTH_SHORT).show()
-                }
                 countryCovidListRecyclerView.adapter = countriesListAdapter
                 countryCovidListRecyclerView.visibility=View.VISIBLE
                 errorTextView.visibility = View.GONE

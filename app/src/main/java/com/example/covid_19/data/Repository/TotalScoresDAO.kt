@@ -16,4 +16,6 @@ interface TotalScoresDAO {
     suspend fun update(totalScores: TotalScores)
     @Delete
     suspend fun delete(totalScores: TotalScores)
+    @Query("DELETE FROM TotalScores")
+    suspend fun deleteAll()
 }
